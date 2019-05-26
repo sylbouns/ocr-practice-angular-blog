@@ -1,20 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { PostComponent } from './post/post.component';
-import { PostListComponent } from './post-list/post-list.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: 'post', loadChildren: './post/post.module#PostModule' },
+  { path: '', redirectTo: 'post', pathMatch: 'full' },
+  { path: '**', redirectTo: 'post' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostComponent,
-    PostListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]

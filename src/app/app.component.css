@@ -1,0 +1,25 @@
+/* Navigation */
+.navbar-toggler {
+    border: none;
+    cursor: pointer;
+}
+li.nav-item {
+    border-bottom: 3px solid transparent;
+}
+li.nav-item.active {
+    border-color: grey;
+}
+.nav-new-item {
+    padding: 5px 20px 5px 15px;
+    background-color: lightgrey;
+    color: black;
+    border-radius: 5px;
+}
+.nav-new-item.active {
+    background-color: grey;
+    color: white;
+    border-radius: 5px;
+}
+.nav-new-item i {
+    padding-right: 5px
+}
