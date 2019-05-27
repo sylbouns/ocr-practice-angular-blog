@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PostService } from '../post.service';
+import { POST_BASE_PATH } from 'src/environments/environment';
 import { Post } from '../post.model';
-import { Guid } from 'guid-typescript';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-form',
@@ -12,9 +12,10 @@ import { Guid } from 'guid-typescript';
 })
 export class PostFormComponent implements OnInit {
 
-  post: Post = new Post();
-  isNewPost: Boolean = true;
-  postForm: FormGroup;
+  public post: Post = new Post();
+  public isNewPost: Boolean = true;
+  public postForm: FormGroup;
+  public postBasePath: string = '/' + POST_BASE_PATH;
 
   constructor(private formBuilder: FormBuilder,
               private postService: PostService,
@@ -22,16 +23,17 @@ export class PostFormComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get("id");
-    if (null !== id) {
-      this.post = this.postService.getPost(Guid.parse(id));
-      this.isNewPost = false;
-    }
+    this.route.data.subscribe((data: { post: Post }) => {
+      if (data.post) {
+        this.post = data.post;
+        this.isNewPost = false;  
+      }
+    });
+
     this.initForm();
   }
 
   initForm() {
-    console.log(this.post);
     this.postForm = this.formBuilder.group({
       title: [this.post.title, Validators.required],
       content: [this.post.content, Validators.required],

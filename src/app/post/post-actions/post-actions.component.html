@@ -1,8 +1,8 @@
 <div class="dropdown">
   <i class="fas fa-ellipsis-v" data-toggle="dropdown"></i>
   <div class="dropdown-menu dropdown-menu-right fade" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" routerLink="/post/{{ id }}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">View</a>
-    <a class="dropdown-item" routerLink="/post/{{ id }}/edit" routerLinkActive="active">Edit</a>
+    <a class="dropdown-item" [routerLink]="[ postBasePath, id, 'view']" routerLinkActive="active">View</a>
+    <a class="dropdown-item" [routerLink]="[ postBasePath, id, 'edit']" routerLinkActive="active">Edit</a>
     <a class="dropdown-item" (click)="onPostDelete()">Delete</a>
   </div>
 </div>

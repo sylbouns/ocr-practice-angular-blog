@@ -1,9 +1,9 @@
 <h1>{{ isNewPost ? 'New post' : 'Edit post' }}</h1>
-<form [formGroup]="postForm" (ngSubmit)="onSubmitForm()">
+<form *ngIf="post" [formGroup]="postForm" (ngSubmit)="onSubmitForm()">
   <div class="card">
     <div class="card-body">
       <div class="float-right">
-        <app-post-actions *ngIf="!isNewPost" [id]="post.id"></app-post-actions>
+        <app-post-actions *ngIf="!isNewPost" [id]="post.id.toString()"></app-post-actions>
       </div>
       <div class="form-group">
         <label for="title" class="form">Title</label>
@@ -18,4 +18,4 @@
     </div>
   </div>
 </form>
-<a routerLink="/post/list"><i class="fas fa-long-arrow-alt-left"></i> Back to post list</a>
+<a [routerLink]="[ postBasePath, 'list']"><i class="fas fa-long-arrow-alt-left"></i> Back to post list</a>

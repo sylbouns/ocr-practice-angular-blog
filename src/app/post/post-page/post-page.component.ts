@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Guid } from 'guid-typescript';
+import { POST_BASE_PATH } from 'src/environments/environment';
 import { Post } from '../post.model';
-import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-page',
@@ -12,13 +11,12 @@ import { PostService } from '../post.service';
 export class PostPageComponent implements OnInit {
 
   public post: Post;
+  public postBasePath: string = '/' + POST_BASE_PATH;
 
-  constructor(private postService: PostService,
-              private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get("id");
-    this.post = this.postService.getPost(Guid.parse(id));
+    this.route.data.subscribe((data: { post: Post }) => this.post = data.post );
   }
 
   loveItsUp() {

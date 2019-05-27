@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from '../post.service';
-import { Guid } from 'guid-typescript';
+import { POST_BASE_PATH } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-actions',
@@ -9,13 +9,15 @@ import { Guid } from 'guid-typescript';
   styleUrls: ['./post-actions.component.css']
 })
 export class PostActionsComponent {
-  @Input() id: Guid;
+
+  @Input() id: string;
+  public postBasePath: string = '/' + POST_BASE_PATH;
 
   constructor(private postService: PostService,
               private router: Router) { }
 
   onPostDelete() {
     this.postService.deletePost(this.id);
-    this.router.navigate(['/post']);
+    this.router.navigate([this.postBasePath, 'list']);
   }
 }

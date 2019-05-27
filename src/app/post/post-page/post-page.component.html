@@ -7,7 +7,7 @@
   <div class="card-body">
     <div class="header-container">
       <h6 class="card-subtitle">{{ post.createdAt | date: 'EEEE d MMMM y' }}</h6>
-      <app-post-actions [id]="post.id"></app-post-actions>
+      <app-post-actions [id]="post.id.toString()"></app-post-actions>
     </div>
     <p class="card-text">{{ post.content }}</p>
     <span class="loveits mr-3">{{ post.loveIts | abs }}
@@ -18,4 +18,4 @@
     <button class="btn btn-danger" (click)="loveItsDown()">Don't love it!</button>
   </div>
 </div>
-<a routerLink="/post/list"><i class="fas fa-long-arrow-alt-left"></i> Back to post list</a>
+<a [routerLink]="[ postBasePath, 'list']"><i class="fas fa-long-arrow-alt-left"></i> Back to post list</a>
