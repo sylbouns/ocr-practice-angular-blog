@@ -12,11 +12,11 @@ import { PostService } from './post.service';
 import { AbsPipe } from '../core/abs.pipe';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: 'list', component: PostListComponent },
   { path: 'new', component: PostFormComponent },
   { path: ':id', component: PostPageComponent },
   { path: ':id/edit', component: PostFormComponent },
-  { path: '**', redirectTo: 'list' },
 ];
 
 @NgModule({
